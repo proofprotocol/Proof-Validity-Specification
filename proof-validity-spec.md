@@ -383,7 +383,7 @@ This specification defines proof validity. It is foundational to the following c
 | Proof Protocol Specification (PP-SPEC-001) | Core protocol. This document defines validity criteria for artifacts produced under PP-SPEC-001. |
 | Witness Protocol Specification (PP-SPEC-005) | Defines witness classes referenced in Section 3.4. |
 | ProofBundle Format Specification (PP-SPEC-003) | Defines the container format that carries the elements required by this specification. |
-| ProofRegistry API Specification (PP-SPEC-004) | Defines the anchoring endpoint referenced in Section 3.5 and the query interface for validity assessment in Section 6. |
+| ProofRegister API Specification (PP-SPEC-004) | Defines the anchoring endpoint referenced in Section 3.5 and the query interface for validity assessment in Section 6. |
 | Proof of Efficacy Score Specification (PP-SPEC-006) | Defines the PES formula and denominator logic referenced in Section 4.7. |
 | ProofStamp Certification Criteria (PP-SPEC-007) | Defines the certification requirements that build on Tier 1 validity established here. |
 
