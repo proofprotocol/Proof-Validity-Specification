@@ -14,7 +14,7 @@
 
 This specification defines what constitutes a valid proof artifact under the Proof Protocol™. It establishes the minimum required elements for a proof to be considered authentic, tamper-evident, and certifiable, and explicitly defines what does not meet the proof standard. The purpose is to close the structural gap that allows vendor-generated log files, reports, and post-hoc attestations to be presented as independent evidence of security efficacy.
 
-A valid proof under this specification must be structurally impossible to fabricate retroactively. This requirement is not a design preference — it is the minimum threshold that separates proof from assertion.
+A valid proof under this specification must be structurally impossible to fabricate retroactively. This requirement is not a design preference - it is the minimum threshold that separates proof from assertion.
 
 ---
 
@@ -48,7 +48,7 @@ This document is a published specification of the Proof Protocol™. It is relea
 
 ## 1. Motivation
 
-The cybersecurity industry operates on a foundation of self-attestation. Vendors produce reports, logs, and scores that describe the performance of their own products. Buyers have no independent mechanism to verify these claims. This is not a gap in implementation — it is a structural property of how security efficacy is currently measured and communicated.
+The cybersecurity industry operates on a foundation of self-attestation. Vendors produce reports, logs, and scores that describe the performance of their own products. Buyers have no independent mechanism to verify these claims. This is not a gap in implementation - it is a structural property of how security efficacy is currently measured and communicated.
 
 The consequences are predictable:
 
@@ -133,7 +133,7 @@ proof_header = {
   "vrs_seed_value": "<hex>",
   "vrs_output_value": "<hex>",
   "commitment_hash": "<SHA-256 from 3.1>",
-  "execution_start_utc": "<ISO 8601 — MUST postdate VRS pulse>"
+  "execution_start_utc": "<ISO 8601 - MUST postdate VRS pulse>"
 }
 ```
 
@@ -157,7 +157,7 @@ proof_record = {
   "record_type": "TTP | OBSERVATION | SCOPE_EVENT | ...",
   "classification": "BLOCKED | MISSED | OBSERVED | IRRELEVANT",
   "content_hash": "<SHA-256 of record content>",
-  "previous_record_hash": "<SHA-256 of prior record — genesis uses VRS output value>",
+  "previous_record_hash": "<SHA-256 of prior record - genesis uses VRS output value>",
   "chain_hash": "<SHA-256(content_hash + previous_record_hash)>",
   "timestamp_utc": "<ISO 8601>"
 }
@@ -165,7 +165,7 @@ proof_record = {
 
 **Failure modes:**
 
-- A missing record in the sequence is not a gap — it is an invalidation event
+- A missing record in the sequence is not a gap - it is an invalidation event
 - A hash mismatch at any link invalidates the chain from that point forward
 - A chain that does not originate from the VRS pulse output value is not a valid chain under this specification
 - A chain submitted as complete that does not account for all declared test cases in the original commitment is incomplete and fails this requirement
@@ -180,9 +180,9 @@ proof_record = {
 
 Witness classes are defined in the Witness Protocol Specification (PP-SPEC-005):
 
-- **Class 1 — Automated:** Machine-generated telemetry from an independent system
-- **Class 2 — Human-in-Loop:** A human observer present during execution
-- **Class 3 — Independent Third Party:** A party with no financial or organizational relationship to the tester or vendor
+- **Class 1 - Automated:** Machine-generated telemetry from an independent system
+- **Class 2 - Human-in-Loop:** A human observer present during execution
+- **Class 3 - Independent Third Party:** A party with no financial or organizational relationship to the tester or vendor
 
 **Implementation:**
 
@@ -200,7 +200,7 @@ witness_declaration = {
 
 - A witness declared after execution begins does not satisfy this requirement
 - A witness with a financial or organizational relationship to the vendor cannot be classified as Class 3
-- A vendor's own logging infrastructure cannot serve as the sole Class 1 witness — it must be an independent automated system
+- A vendor's own logging infrastructure cannot serve as the sole Class 1 witness - it must be an independent automated system
 
 ---
 
@@ -261,7 +261,7 @@ The following artifact types do not meet the proof standard under this specifica
 
 ### 4.1 Log Files
 
-A log file — including cryptographically signed logs — is not a proof. Logs record what a system reported about itself. They have no pre-execution commitment, no external witness, and no chain linkage. A signed log proves only that a file existed at signing time. It does not prove what the system did, when it did it, or under what conditions.
+A log file - including cryptographically signed logs - is not a proof. Logs record what a system reported about itself. They have no pre-execution commitment, no external witness, and no chain linkage. A signed log proves only that a file existed at signing time. It does not prove what the system did, when it did it, or under what conditions.
 
 This includes: SIEM exports, EDR telemetry exports, firewall logs, agent activity logs, and any structured log format regardless of signing method.
 
@@ -295,7 +295,7 @@ A score expressed without a declared denominator, exclusion criteria, and case c
 
 ### 4.8 Clean Runs Without Anomaly Documentation
 
-Any execution that produces zero failures, zero edge cases, and zero OBSERVED or IRRELEVANT classifications SHOULD be treated as suspect. Real adversarial testing against real systems surfaces anomalies. An execution record with no anomaly documentation is not evidence of perfect performance — it is evidence that anomalies were not recorded, not reported, or not encountered due to inadequate test scope.
+Any execution that produces zero failures, zero edge cases, and zero OBSERVED or IRRELEVANT classifications SHOULD be treated as suspect. Real adversarial testing against real systems surfaces anomalies. An execution record with no anomaly documentation is not evidence of perfect performance - it is evidence that anomalies were not recorded, not reported, or not encountered due to inadequate test scope.
 
 A proof artifact with no anomaly records is not automatically invalid. However, it MUST include an explicit declaration explaining the absence of anomaly classifications, which will be reviewed as part of registry anchoring.
 
@@ -320,39 +320,39 @@ Proof artifacts are classified into four validity tiers. Tier classification det
 
 The following procedure is used by ProofRegister™ and by independent assessors to evaluate proof artifact validity.
 
-### Step 1 — Pre-Execution Commitment Check
+### Step 1 - Pre-Execution Commitment Check
 - Retrieve the VRS pulse referenced in the proof header
 - Verify the pulse sequence number, seed value, and output value against the public VRS record
 - Verify that the commitment hash was submitted to the VRS before the execution start timestamp
 - **Failure at this step → Tier 4**
 
-### Step 2 — Temporal Integrity Check
+### Step 2 - Temporal Integrity Check
 - Verify that all chain records postdate the VRS pulse timestamp
 - Verify that the execution start timestamp in the proof header postdates the VRS pulse
 - **Failure at this step → Tier 4**
 
-### Step 3 — Chain Continuity Check
+### Step 3 - Chain Continuity Check
 - Recompute each chain hash from record content and previous record hash
 - Verify the genesis record links to the VRS output value
 - Verify that all declared test cases in the commitment manifest are accounted for in the chain
 - **Failure at this step → Tier 3 if commitment exists, Tier 4 if commitment absent**
 
-### Step 4 — Witness Declaration Check
+### Step 4 - Witness Declaration Check
 - Verify that all declared witnesses appear in the proof header with pre-execution declaration flag set to true
 - Verify witness class declarations
 - **Failure at this step (no witness declared pre-execution) → Tier 3**
 
-### Step 5 — Anchoring Check
+### Step 5 - Anchoring Check
 - Verify the anchor hash against the ProofRegister™ block record
 - Verify the registry record is publicly queryable and matches the submitted bundle
 - **Failure at this step → Tier 3**
 
-### Step 6 — Scope Integrity Check
+### Step 6 - Scope Integrity Check
 - Verify the SUT fingerprint matches the declared version and configuration
 - Verify that scope events are recorded within the chain for any SUT changes during execution
 - **Failure at this step → Tier 3**
 
-### Step 7 — Tier Assignment
+### Step 7 - Tier Assignment
 - All steps pass, Class 2+ witness → **Tier 1: Proof-Complete**
 - All steps pass, Class 1 witness only → **Tier 2: Proof-Minimal**
 - Step 1 passes, one or more other steps fail → **Tier 3: Proof-Attempted**
@@ -398,9 +398,9 @@ This document has no IANA considerations.
 ## 10. References
 
 - NIST Randomness Beacon: https://beacon.nist.gov
-- RFC 2119 — Key words for use in RFCs: https://www.rfc-editor.org/rfc/rfc2119
+- RFC 2119 - Key words for use in RFCs: https://www.rfc-editor.org/rfc/rfc2119
 - Proof Protocol™ Specification v1.1 (PP-SPEC-001): https://github.com/proofprotocol
-- NIST SP 800-90B — Recommendation for the Entropy Sources Used for Random Bit Generation
+- NIST SP 800-90B - Recommendation for the Entropy Sources Used for Random Bit Generation
 - Creative Commons CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
 
 ---
