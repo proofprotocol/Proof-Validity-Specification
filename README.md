@@ -4,7 +4,7 @@
 **Version:** 1.0  
 **Status:** Published  
 **License:** CC BY 4.0  
-**Maintained by:** Proof Economy Standards Alliance (PESA)  
+**Maintained by:** Proof Economy™ Standards Alliance (PESA)  
 **Repository:** https://github.com/proofprotocol  
 **Published:** 2026-07-12  
 
@@ -12,7 +12,7 @@
 
 ## Abstract
 
-This specification defines what constitutes a valid proof artifact under the Proof Protocol. It establishes the minimum required elements for a proof to be considered authentic, tamper-evident, and certifiable, and explicitly defines what does not meet the proof standard. The purpose is to close the structural gap that allows vendor-generated log files, reports, and post-hoc attestations to be presented as independent evidence of security efficacy.
+This specification defines what constitutes a valid proof artifact under the Proof Protocol™. It establishes the minimum required elements for a proof to be considered authentic, tamper-evident, and certifiable, and explicitly defines what does not meet the proof standard. The purpose is to close the structural gap that allows vendor-generated log files, reports, and post-hoc attestations to be presented as independent evidence of security efficacy.
 
 A valid proof under this specification must be structurally impossible to fabricate retroactively. This requirement is not a design preference — it is the minimum threshold that separates proof from assertion.
 
@@ -20,7 +20,7 @@ A valid proof under this specification must be structurally impossible to fabric
 
 ## Status of This Document
 
-This document is a published specification of the Proof Protocol. It is released under the Creative Commons Attribution 4.0 International License (CC BY 4.0). You are free to share and adapt this document for any purpose, including commercially, provided appropriate credit is given to Nebulonium, Inc. / HACKERverse and PESA as the original source.
+This document is a published specification of the Proof Protocol™. It is released under the Creative Commons Attribution 4.0 International License (CC BY 4.0). You are free to share and adapt this document for any purpose, including commercially, provided appropriate credit is given to Nebulonium, Inc. / HACKERverse and PESA as the original source.
 
 ---
 
@@ -39,7 +39,7 @@ This document is a published specification of the Proof Protocol. It is released
 5. [Validity Tiers](#5-validity-tiers)
 6. [Validity Assessment Procedure](#6-validity-assessment-procedure)
 7. [Conformance](#7-conformance)
-8. [Relationship to Other Proof Protocol Specifications](#8-relationship-to-other-proof-protocol-specifications)
+8. [Relationship to Other Proof Protocol™ Specifications](#8-relationship-to-other-proof-protocol-specifications)
 9. [IANA Considerations](#9-iana-considerations)
 10. [References](#10-references)
 11. [Authors](#11-authors)
@@ -79,11 +79,11 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 
 **Witness:** A declared party that attests to the conditions, execution, or results of a proof run. Witnesses are classified by independence level (see Witness Protocol Specification, PP-SPEC-005).
 
-**ProofRegister:** The append-only public registry where completed proof bundles are anchored and made queryable.
+**ProofRegister™:** The append-only public registry where completed proof bundles are anchored and made queryable.
 
 **Proof of Efficacy Score (PES):** A numeric score expressing containment performance. Defined as `Blocked / (Blocked + Missed) × 100`. OBSERVED and IRRELEVANT classified cases are explicitly excluded from the denominator.
 
-**ProofStamp:** The HACKERverse certification mark awarded to proof artifacts that meet Proof-Complete validity tier requirements and pass independent registry review.
+**ProofStamp™:** The HACKERverse certification mark awarded to proof artifacts that meet Proof-Complete validity tier requirements and pass independent registry review.
 
 ---
 
@@ -212,7 +212,7 @@ witness_declaration = {
 
 ```
 anchor_record = {
-  "registry": "ProofRegister | <equivalent append-only registry>",
+  "registry": "ProofRegister™ | <equivalent append-only registry>",
   "campaign_id": "<registry campaign identifier>",
   "block_number": <integer>,
   "anchor_hash": "<SHA-256 of submitted proof bundle>",
@@ -305,20 +305,20 @@ A proof artifact with no anomaly records is not automatically invalid. However, 
 
 Proof artifacts are classified into four validity tiers. Tier classification determines registry eligibility and certification eligibility.
 
-| Tier | Name | Description | ProofStamp Eligible |
+| Tier | Name | Description | ProofStamp™ Eligible |
 |------|------|-------------|---------------------|
-| 1 | **Proof-Complete** | All six required elements present. Chain intact. Anchored to ProofRegister. Minimum Class 2 witness. | Yes |
-| 2 | **Proof-Minimal** | All six required elements present. Chain intact. Anchored to ProofRegister. Class 1 witness only. | No |
+| 1 | **Proof-Complete** | All six required elements present. Chain intact. Anchored to ProofRegister™. Minimum Class 2 witness. | Yes |
+| 2 | **Proof-Minimal** | All six required elements present. Chain intact. Anchored to ProofRegister™. Class 1 witness only. | No |
 | 3 | **Proof-Attempted** | Pre-execution commitment present. One or more other elements missing or degraded. Explicit gap declaration required. | No |
 | 4 | **Not a Proof** | No pre-execution commitment present. Cannot be registered as a proof artifact under any classification. MAY be registered as a Report for audit trail purposes with explicit non-proof labeling. | No |
 
-**Tier 4 is a hard floor.** The absence of pre-execution commitment is not a degraded proof. It is a categorically different artifact class. Tier 4 artifacts registered in ProofRegister under a Report classification MUST carry explicit machine-readable and human-readable labeling indicating they do not meet the proof standard.
+**Tier 4 is a hard floor.** The absence of pre-execution commitment is not a degraded proof. It is a categorically different artifact class. Tier 4 artifacts registered in ProofRegister™ under a Report classification MUST carry explicit machine-readable and human-readable labeling indicating they do not meet the proof standard.
 
 ---
 
 ## 6. Validity Assessment Procedure
 
-The following procedure is used by ProofRegister and by independent assessors to evaluate proof artifact validity.
+The following procedure is used by ProofRegister™ and by independent assessors to evaluate proof artifact validity.
 
 ### Step 1 — Pre-Execution Commitment Check
 - Retrieve the VRS pulse referenced in the proof header
@@ -343,7 +343,7 @@ The following procedure is used by ProofRegister and by independent assessors to
 - **Failure at this step (no witness declared pre-execution) → Tier 3**
 
 ### Step 5 — Anchoring Check
-- Verify the anchor hash against the ProofRegister block record
+- Verify the anchor hash against the ProofRegister™ block record
 - Verify the registry record is publicly queryable and matches the submitted bundle
 - **Failure at this step → Tier 3**
 
@@ -370,22 +370,22 @@ An implementation conforms to this specification if:
 4. It does not represent Tier 3 or Tier 4 artifacts as meeting the proof standard
 5. It does not accept the artifact types enumerated in Section 4 as substitutes for valid proof artifacts
 
-Implementations seeking ProofStamp certification MUST conform to this specification and produce artifacts that qualify at minimum as Tier 1: Proof-Complete.
+Implementations seeking ProofStamp™ certification MUST conform to this specification and produce artifacts that qualify at minimum as Tier 1: Proof-Complete.
 
 ---
 
-## 8. Relationship to Other Proof Protocol Specifications
+## 8. Relationship to Other Proof Protocol™ Specifications
 
 This specification defines proof validity. It is foundational to the following companion specifications:
 
 | Document | Relationship |
 |----------|-------------|
-| Proof Protocol Specification (PP-SPEC-001) | Core protocol. This document defines validity criteria for artifacts produced under PP-SPEC-001. |
+| Proof Protocol™ Specification (PP-SPEC-001) | Core protocol. This document defines validity criteria for artifacts produced under PP-SPEC-001. |
 | Witness Protocol Specification (PP-SPEC-005) | Defines witness classes referenced in Section 3.4. |
-| ProofBundle Format Specification (PP-SPEC-003) | Defines the container format that carries the elements required by this specification. |
-| ProofRegister API Specification (PP-SPEC-004) | Defines the anchoring endpoint referenced in Section 3.5 and the query interface for validity assessment in Section 6. |
+| ProofBundle™ Format Specification (PP-SPEC-003) | Defines the container format that carries the elements required by this specification. |
+| ProofRegister™ API Specification (PP-SPEC-004) | Defines the anchoring endpoint referenced in Section 3.5 and the query interface for validity assessment in Section 6. |
 | Proof of Efficacy Score Specification (PP-SPEC-006) | Defines the PES formula and denominator logic referenced in Section 4.7. |
-| ProofStamp Certification Criteria (PP-SPEC-007) | Defines the certification requirements that build on Tier 1 validity established here. |
+| ProofStamp™ Certification Criteria (PP-SPEC-007) | Defines the certification requirements that build on Tier 1 validity established here. |
 
 ---
 
@@ -399,7 +399,7 @@ This document has no IANA considerations.
 
 - NIST Randomness Beacon: https://beacon.nist.gov
 - RFC 2119 — Key words for use in RFCs: https://www.rfc-editor.org/rfc/rfc2119
-- Proof Protocol Specification v1.1 (PP-SPEC-001): https://github.com/proofprotocol
+- Proof Protocol™ Specification v1.1 (PP-SPEC-001): https://github.com/proofprotocol
 - NIST SP 800-90B — Recommendation for the Entropy Sources Used for Random Bit Generation
 - Creative Commons CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
 
@@ -407,7 +407,7 @@ This document has no IANA considerations.
 
 ## 11. Authors
 
-Proof Economy Standards Alliance (PESA)  
+Proof Economy™ Standards Alliance (PESA)  
 https://proofeconomy.foundation  
 contact@proofeconomy.foundation  
 
@@ -416,4 +416,4 @@ contact@proofeconomy.foundation
 ---
 
 *Copyright 2026 Nebulonium, Inc. dba HACKERverse. Licensed under CC BY 4.0.*  
-*ProofStamp is a certification mark of Nebulonium, Inc.*
+*ProofStamp™ is a certification mark of Nebulonium, Inc.*
