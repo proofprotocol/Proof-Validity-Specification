@@ -1,0 +1,25 @@
+{
+  "title": "PP-SPEC-002: Proof Validity Specification",
+  "upload_type": "publication",
+  "creators": [
+    {
+      "name": "Ellrod, Craig",
+      "affiliation": "Nebulonium, Inc. (HACKERverse)"
+    }
+  ],
+  "description": "PP-SPEC-002: Proof Validity Specification",
+  "license": "cc-by-4.0",
+  "access_right": "open",
+  "keywords": [
+    "proof-protocol",
+    "proof-validity"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/proofprotocol/Proof-Validity-Specification",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ],
+  "publication_type": "technicalnote"
+}
