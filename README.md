@@ -403,6 +403,38 @@ The following procedure is used by the registry and by independent assessors. An
 
 ---
 
+## Machine-Readable Validity Schema
+
+The normative machine-readable structural schema for this specification is:
+
+[`proof-validity.schema.json`](./proof-validity.schema.json)
+
+The schema uses **JSON Schema Draft 2020-12** and represents the six required proof elements defined in Section 3.
+
+Two validity states MUST be distinguished:
+
+- **Schema-valid** — the Report contains the required fields, types, formats, and structural elements defined by `proof-validity.schema.json`.
+- **Proof-valid** — the Report is schema-valid **and** the witness, pre-execution commitment, temporal integrity, chain continuity, immutable anchoring, and scope-integrity checks defined by this specification have been independently verified.
+
+JSON Schema validation alone MUST NOT set `proof: true`. Structural validation cannot establish that a signature, hash chain, witness, VRS record, registry anchor, timestamp relationship, or SUT fingerprint is genuine.
+
+The deterministic proof decision is:
+
+```
+proof =
+  schema_valid
+  AND witness_valid
+  AND commitment_valid
+  AND temporal_valid
+  AND chain_valid
+  AND anchor_valid
+  AND scope_valid
+```
+
+If any required check fails, the Report MUST set `proof: false` and identify the failing check in `assessment.failing_steps`.
+
+---
+
 ## 7. Conformance
 
 An implementation conforms to this specification if:
