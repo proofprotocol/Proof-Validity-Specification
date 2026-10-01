@@ -435,6 +435,58 @@ If any required check fails, the Report MUST set `proof: false` and identify the
 
 ---
 
+## Extensions and Vendor Namespaces
+
+Proof Protocol Reports MAY contain vendor-specific, implementation-specific, or domain-specific metadata in the optional top-level `extensions` object.
+
+Extensions exist to permit interoperability and customization **without forking or weakening the Proof Protocol validity model**.
+
+### Extension Namespace
+
+Each extension MUST be contained under a globally distinguishable namespace. Reverse-domain notation is RECOMMENDED where the publisher controls the corresponding domain.
+
+Example:
+
+```json
+{
+  "extensions": {
+    "com.vendor.product": {
+      "control_id": "ABC-123",
+      "telemetry_ref": "event-84721",
+      "custom_metric": 0.97
+    }
+  }
+}
+```
+
+### Normative Extension Rules
+
+1. Extensions MAY add metadata, evidence references, vendor-specific measurements, implementation details, or domain-specific information.
+2. Extensions MUST NOT alter, replace, weaken, override, reinterpret, or suppress any normative PP-SPEC-002 validity requirement or core field.
+3. An extension MUST NOT cause an otherwise invalid Report to become `proof: true`.
+4. A conforming core validator MUST be able to ignore an unknown extension namespace and still determine PP-SPEC-002 core validity.
+5. Extension data MAY be referenced as evidence, but the existence of an extension or a vendor assertion inside it does not by itself establish validity.
+6. A vendor-specific validator MAY perform additional validation of a recognized extension. Such validation is supplemental and MUST remain distinguishable from the core PP-SPEC-002 proof determination.
+7. Extension publishers SHOULD document the namespace, field semantics, versioning, and any extension-specific validation procedure.
+8. Core Proof Protocol fields MUST NOT be duplicated inside an extension for the purpose of supplying conflicting or alternative values.
+
+The validity relationship is therefore:
+
+```
+PP-SPEC-002 core validity requirements
+              +
+       optional extensions
+              |
+              v
+       proof determination
+```
+
+Extensions enrich the Report. They do not redefine what **valid proof** means.
+
+The machine-readable rules for the extension container are defined in `proof-validity.schema.json`. Core schema validation retains `additionalProperties: false`; arbitrary customization is permitted only inside the explicitly defined `extensions` namespace container.
+
+---
+
 ## 7. Conformance
 
 An implementation conforms to this specification if:
