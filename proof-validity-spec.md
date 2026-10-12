@@ -3,7 +3,7 @@
 **Document ID:** PP-SPEC-002  
 **Version:** 1.0  
 **Status:** Published  
-**License:** Greater Good Commercial License 1.0 (GGL-C-1.0); text CC BY-ND 4.0 under Part S. See LICENSE.md.
+**License:** Greater Good Commercial License 1.0 (GGL-C-1.0); text CC BY 4.0 under Part S. See LICENSE.md.
 **Maintained by:** Proof Economy™ Standards Alliance (PESA)  
 **Repository:** https://github.com/proofprotocol  
 **Published:** 2026-07-12  
@@ -452,5 +452,5 @@ contact@proofeconomy.foundation
 
 ---
 
-*Copyright 2026 Nebulonium, Inc. dba HACKERverse. Licensed under the Greater Good Commercial License 1.0 (see LICENSE.md); text CC BY-ND 4.0 under its Part S. Original inventor: Craig Thomas Ellrod (ORCID 0009-0004-1058-7666).
+*Copyright 2026 Nebulonium, Inc. dba HACKERverse. Licensed under the Greater Good Commercial License 1.0 (see LICENSE.md); text CC BY 4.0 under its Part S. Original inventor: Craig Thomas Ellrod (ORCID 0009-0004-1058-7666).
 *ProofStamp™ is a certification mark of Nebulonium, Inc.*
